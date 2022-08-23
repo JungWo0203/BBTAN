@@ -25,7 +25,7 @@ public class Ball : MonoBehaviour
 
     public void ballstart()
     {
-        addPos = GameManager.gameMgr.gap * power;
+        addPos = -GameManager.gameMgr.gap * power;
         ballRigidbody.velocity = addPos;
     }
 
@@ -36,7 +36,8 @@ public class Ball : MonoBehaviour
         {
             ballRigidbody.velocity = new Vector3(0, 0, 0);
             blockcount++;
-
+            GameManager.gameMgr.isShot = false;
+            GameManager.gameMgr.DownGroup();
         }
     }
 }
