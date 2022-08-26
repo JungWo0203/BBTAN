@@ -11,11 +11,13 @@ public class Ball : MonoBehaviour
     public float power = 7f;
     public Vector3 addPos;
 
+    public GameObject Item;
+    public Rigidbody2D ItemRig = null;
     private void Awake()
     {
         BallMgr = this;
         ballRigidbody = GetComponent<Rigidbody2D>();
-
+        ItemRig = Item.GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -39,5 +41,16 @@ public class Ball : MonoBehaviour
             GameManager.gameMgr.isShot = false;
             GameManager.gameMgr.DownGroup();
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        Debug.Log("Item 획득!");
+        if (other.gameObject.tag == "Item")
+        {
+            other.attachedRigidbody.bodyType = RigidbodyType2D.Dynamic;
+        }
+
     }
 }

@@ -39,26 +39,20 @@ public class GameManager : MonoBehaviour
                 if ((secondPos - firstPos).magnitude < 0.1) return;
                 gap = (secondPos - firstPos).normalized;
                 Debug.Log("gap:" + gap);
-                Cycle();
+                Ball.BallMgr.ballstart();
                 isShot = true;
             }
         }
         
     }
 
-
-
-    void Cycle ()
-    {
         // 발사
-        Ball.BallMgr.ballstart();
         
         // 블럭 생성 : 인스턴스를 하면서 y값을 줄여가며 내려가게하기
 
         // 블럭 더 쌔지게 하기 : 하나의 변수를 생성한뒤 드래그 & 드롭하면 1씩 더해지게 해준뒤 새롭게 블럭이 생성되면 이 변수를 이용하여 내구도와 안에 피를 채운다.
 
         // 아이템 [공 더해는 거] : 
-    }
 
     public void DownGroup()
     {

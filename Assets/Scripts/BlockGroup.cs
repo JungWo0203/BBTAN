@@ -16,7 +16,7 @@ public class BlockGroup : MonoBehaviour
     {
         if(count >= 5 && itemCount == 0)
         {
-            foreach(Transform children in transform) 
+            foreach(Transform children in transform)
             {
                 if (!children.gameObject.activeInHierarchy)
                 {

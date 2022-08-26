@@ -7,7 +7,7 @@ using TMPro;
 public class block : MonoBehaviour
 {
     public GameObject itemPrefab;
-    public GameObject score;
+    public int score;
 
     public TextMeshPro scoreText;
 
@@ -15,6 +15,7 @@ public class block : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        score = Ball.blockcount;
         blockGroup = transform.parent.GetComponent<BlockGroup>();
 
         bool OnOff = (Random.value > 0.5f); // ON / OFF 
@@ -22,23 +23,29 @@ public class block : MonoBehaviour
 
         if (!OnOff && Random.value > 0.5f && blockGroup.enabled)
         {
+            Debug.Log("enabled" + blockGroup.enabled);
             blockGroup.SpawnItem(transform.position);
             blockGroup.itemCount++;
         }
 
         blockGroup.count++;
 
-        scoreText.text = Ball.blockcount.ToString();
+        scoreText.text = score.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if (score <= 1)
+        {
+            Destroy(gameObject);
+        }
+        score--;
+        scoreText.text = score.ToString();
     }
 }
