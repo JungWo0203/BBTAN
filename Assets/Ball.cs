@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     public bool ismoving;
     public int itemballcount = 0;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,31 +91,37 @@ public class Ball : MonoBehaviour
 
     public void GridLine(Vector3 vec)
     {
-        print(transform.position - vec.normalized * 2);
+        int layerMask = 1 << LayerMask.NameToLayer("Wall");
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -vec, 200, layerMask);
+        vec = (transform.position - (vec * 20));
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position - vec.normalized * 2, -vec, 10);
-        Debug.DrawRay(transform.position - vec.normalized * 2, -vec, Color.red, 0.3f);
-        vec = (transform.position - (vec * 10));
-        print(hit.transform.name);
-        if (hit.collider.CompareTag("Wall"))
+        if (hit)
         {
-            print("Wall!!");
-            Vector3 vec2 = vec;
-            vec = hit.point;
-            line.positionCount = 3;
-            print("1 " + vec2.x + " " + vec.x);
-            float x = vec.x - vec2.x;
-            vec2.x = vec.x + x;
-
-            line.SetPosition(2, vec2);
-            Debug.Log(vec);
+            if (hit.collider.CompareTag("Wall"))
+            {
+                Vector3 vec2 = vec;
+                vec = hit.point;
+                line.positionCount = 3;
+                print("1 " + vec2.x + " " + vec.x);
+                float x = vec.x - vec2.x;
+                vec2.x = vec.x + x;
+                line.SetPosition(0, transform.position);
+                line.SetPosition(1, vec);
+                line.SetPosition(2, vec2);
+                return;
+            }
+            else
+            {
+                line.positionCount = 2;
+                line.SetPosition(0, transform.position);
+                line.SetPosition(1, vec);
+            }
+            
         }
-        else
-        {
-            line.positionCount = 2;
-        }
+        line.positionCount = 2;
         line.SetPosition(0, transform.position);
         line.SetPosition(1, vec);
+
     }
 
     public void BallStart(Vector3 gap)

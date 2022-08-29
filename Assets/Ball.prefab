@@ -246,10 +246,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36cced822b0f480c96eade921140a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 4000
   line: {fileID: 1328912504}
   ismoving: 0
   itemballcount: 0
+  ii: 200
 --- !u!120 &1328912504
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -292,7 +292,6 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 80, z: 0}
   - {x: 0, y: 80, z: 0}
   - {x: 0, y: 80, z: 0}
   m_Parameters:

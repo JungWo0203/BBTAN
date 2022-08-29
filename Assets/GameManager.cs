@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameMgr = this;
-        BlockGenerator();
     }
 
     void Update()
